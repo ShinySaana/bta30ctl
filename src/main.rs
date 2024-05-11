@@ -5,8 +5,7 @@ use std::error::Error;
 use futures_util::stream::StreamExt;
 use std::env;
 
-
-const BTA_NAME: &str = "FiiO BTA30 Pro";
+const BTA_NAME: &str = "FiiO BTA30";
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
@@ -41,7 +40,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
                     .unwrap()
                     .local_name;
 
-                if local_name.is_some_and(|n| n == BTA_NAME) {
+                if local_name.is_some_and(|n| n.contains(BTA_NAME)) {
                     bta_peripheral = Some(discovered);
                     break;
                 }
@@ -80,6 +79,8 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     let volume_off = bta30ctl::set_volume_command(volume).unwrap();
     bta30ctl::send_command(&bta_peripheral, &volume_off).await?;
+
+    bta_peripheral.disconnect().await?;
 
     Ok(())
 }
