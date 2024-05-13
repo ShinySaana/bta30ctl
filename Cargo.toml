@@ -5,9 +5,10 @@ edition = "2021"
 
 [dependencies]
 tokio = { version = "1", features = ["full"] }
-btleplug = { version = "0.11.5", features = ["serde"] }
-futures-util = "0.3.30"
-lazy_static = "1.4.0"
+btleplug = { version = "0.11", features = ["serde"] }
+futures-util = "0.3"
+lazy_static = "1"
+bitflags = "2"
 
 [dependencies.uuid]
 version = "1.8.0"

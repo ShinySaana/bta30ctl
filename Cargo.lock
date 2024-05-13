@@ -101,6 +101,7 @@ dependencies = [
 name = "bta30ctl"
 version = "0.1.0"
 dependencies = [
+ "bitflags 2.5.0",
  "btleplug",
  "futures-util",
  "lazy_static",
