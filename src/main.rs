@@ -71,14 +71,14 @@ async fn main() -> Result<(), Box<dyn Error>> {
         bta_peripheral.connect().await?;
     }
 
-    let volume_adjustable = bta30ctl::set_volume_mode_setting(
+    let volume_adjustable = bta30ctl::set_volume_mode_setting_command(
         bta30ctl::OperationalMode::Rx,
         bta30ctl::VolumeModeSetting::Adjustable,
     ).unwrap();
     bta30ctl::send_command(&bta_peripheral, &volume_adjustable).await?;
 
-    let volume_off = bta30ctl::set_volume_command(volume).unwrap();
-    bta30ctl::send_command(&bta_peripheral, &volume_off).await?;
+    let volume_command = bta30ctl::set_volume_command(volume).unwrap();
+    bta30ctl::send_command(&bta_peripheral, &volume_command).await?;
 
     bta_peripheral.disconnect().await?;
 
